@@ -1,47 +1,51 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Custom styles here */
-    </style>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  /* CSS styles go here */
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Weather Dashboard</h1>
-        <input type="text" id="cityInput" placeholder="Enter city name">
-        <button onclick="getWeatherData()">Search</button>
-        <div id="weatherData"></div>
+<div class="weather-app">
+  <div class="search-bar">
+    <input type="text" placeholder="Enter a city name..." id="search-input">
+    <button onclick="searchWeather()"><i class="fas fa-search"></i></button>
+  </div>
+  
+  <div class="weather-info">
+    <h2 id="location">City, Country</h2>
+    <div class="current-weather">
+      <div class="weather-icon">icon</div>
+      <div class="temperature">0°C</div>
+      <div class="details">
+        <p>Humidity: <span id="humidity">0%</span></p>
+        <p>Wind Speed: <span id="wind-speed">0 m/s</span></p>
+      </div>
     </div>
+    
+    <div class="forecast">
+      <h3>5-Day Forecast</h3>
+      <div class="forecast-days">
+        <div class="day">
+          <div class="day-name">Day 1</div>
+          <div class="weather-icon">icon</div>
+          <div class="temperature">0°C</div>
+        </div>
+        <!-- Repeat for Day 2 to 5 -->
+      </div>
+    </div>
+  </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        function getWeatherData() {
-            const city = document.getElementById('cityInput').value;
-
-            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`)
-                .then(response => {
-                    const data = response.data;
-                    const weatherDataHTML = `
-                        <h2>Current weather in ${data.name}</h2>
-                        <p>Temperature: ${data.main.temp}°C</p>
-                        <p>Humidity: ${data.main.humidity}%</p>
-                        <p>Wind Speed: ${data.wind.speed} m/s</p>
-                    `;
-                    document.getElementById('weatherData').innerHTML = weatherDataHTML;
-                })
-                .catch(error => {
-                    document.getElementById('weatherData').innerHTML = 'City not found';
-                });
-        }
-    </script>
+<script>
+  // JavaScript logic goes here
+</script>
 </body>
-
 </html>
-```
