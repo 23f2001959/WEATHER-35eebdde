@@ -1,0 +1,47 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles here */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button onclick="getWeatherData()">Search</button>
+        <div id="weatherData"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function getWeatherData() {
+            const city = document.getElementById('cityInput').value;
+
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`)
+                .then(response => {
+                    const data = response.data;
+                    const weatherDataHTML = `
+                        <h2>Current weather in ${data.name}</h2>
+                        <p>Temperature: ${data.main.temp}°C</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                        <p>Wind Speed: ${data.wind.speed} m/s</p>
+                    `;
+                    document.getElementById('weatherData').innerHTML = weatherDataHTML;
+                })
+                .catch(error => {
+                    document.getElementById('weatherData').innerHTML = 'City not found';
+                });
+        }
+    </script>
+</body>
+
+</html>
+```
